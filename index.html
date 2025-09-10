@@ -452,6 +452,9 @@
                 display: none;
             }
         }
+        a{
+            text-decoration: none;
+        }
         
         @media (min-width: 992px) {
             .books-grid {
@@ -507,12 +510,21 @@
                 
                 <div class="books-grid">
                     <div class="book-card" data-book="1">
-                        <div class="book-cover">A Demo Book</div>
+                        <div class="book-cover">Image Book</div>
                         <div class="book-info">
-                            <div class="book-title">A Demo Book</div>
+                            <div class="book-title">Image Book</div>
                             <div class="book-author">Ayesh Akter</div>
                         </div>
                     </div>
+                    <a href="https://docs.google.com/document/d/1_bwlk1Xr3xvzCRRACv2KGreJwxOH5h9vInbfr7Aeopw/edit?tab=t.0" target="_blank">
+                        <div class="book-card" data-book="2">
+                        <div class="book-cover">Text Book</div>
+                        <div class="book-info">
+                            <div class="book-title">Text Book</div>
+                            <div class="book-author">Ayesh Akter</div>
+                        </div>
+                    </div>
+                    </a>
                 </div>
             </div>
             
@@ -587,7 +599,7 @@
         // Sample book data with page images
         const books = {
             1: {
-                title: "A Demo Book",
+                title: "Image Book",
                 author: "Ayesh Akter",
                 pages: [
                     "images/1.png",
@@ -606,7 +618,11 @@
                     "images/15.png",
                     "images/16.png",
                 ]
-            }
+            },
+            // 2: {
+            //     title: "Text Book",
+            //     author: "Ayesh Akter",
+            // }
         };
 
         // DOM elements
