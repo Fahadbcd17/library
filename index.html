@@ -1,774 +1,799 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ayesha's Library</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: #333;
-            min-height: 100vh;
-            padding: 15px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: #333;
+        min-height: 100vh;
+        padding: 15px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .logo i {
+        font-size: 1.8rem;
+        color: #6a11cb;
+      }
+
+      .logo h1 {
+        font-weight: 700;
+        color: #2c3e50;
+        font-size: 1.5rem;
+      }
+
+      .search-bar {
+        display: flex;
+        align-items: center;
+        background: white;
+        border-radius: 50px;
+        padding: 8px 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .search-bar input {
+        border: none;
+        outline: none;
+        padding: 8px;
+        font-size: 1rem;
+        width: 100%;
+      }
+
+      .search-bar i {
+        color: #6a11cb;
+      }
+
+      .user-actions {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        gap: 15px;
+      }
+
+      .user-actions i {
+        font-size: 1.3rem;
+        color: #2c3e50;
+        cursor: pointer;
+      }
+
+      .app-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .library-view {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        max-height: 40vh;
+        overflow-y: auto;
+      }
+
+      .library-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .library-header h2 {
+        font-size: 1.3rem;
+      }
+
+      .books-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+      }
+
+      .book-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+
+      .book-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+      }
+
+      .book-cover {
+        height: 160px;
+        background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 1rem;
+        text-align: center;
+        padding: 10px;
+      }
+
+      .book-info {
+        padding: 10px;
+      }
+
+      .book-title {
+        font-weight: 700;
+        margin-bottom: 5px;
+        color: #2c3e50;
+        font-size: 0.9rem;
+      }
+
+      .book-author {
+        color: #7f8c8d;
+        font-size: 0.8rem;
+      }
+
+      .reader-view {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        display: flex;
+        flex-direction: column;
+        min-height: 50vh;
+      }
+
+      .reader-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+      }
+
+      .book-title-display {
+        font-size: 1.2rem;
+        color: #2c3e50;
+        font-weight: 700;
+        text-align: center;
+        width: 100%;
+        margin: 10px 0;
+        order: 3;
+      }
+
+      .reader-content {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        overflow: hidden;
+        position: relative;
+        min-height: 300px;
+      }
+
+      .page-image {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .reader-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-controls {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .btn {
+        padding: 12px 20px;
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        flex: 1;
+        font-size: 0.9rem;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 2px solid #6a11cb;
+        color: #6a11cb;
+        order: 1;
+        width: auto;
+      }
+
+      .progress-bar {
+        width: 100%;
+      }
+
+      .progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        color: #2c3e50;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      .progress-track {
+        height: 6px;
+        background: #e0e0e0;
+        border-radius: 3px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        border-radius: 3px;
+        width: 0%;
+      }
+
+      .view-controls {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        order: 2;
+      }
+
+      .view-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f0f0f0;
+        color: #2c3e50;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .view-btn.active {
+        background: #6a11cb;
+        color: white;
+      }
+
+      .bookmark-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ff6b6b;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        order: 3;
+      }
+
+      .bookmark-btn:hover {
+        background: #ff5252;
+      }
+
+      .mobile-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+
+      .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 0.8rem;
+        color: #7f8c8d;
+      }
+
+      .mobile-nav-item i {
+        font-size: 1.2rem;
+        margin-bottom: 4px;
+      }
+
+      .mobile-nav-item.active {
+        color: #6a11cb;
+      }
+
+      /* Media Queries for Responsiveness */
+      @media (min-width: 480px) {
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            width: 100%;
-            justify-content: center;
+          width: auto;
+          justify-content: flex-start;
+          margin-bottom: 0;
         }
-        
-        .logo i {
-            font-size: 1.8rem;
-            color: #6a11cb;
-        }
-        
-        .logo h1 {
-            font-weight: 700;
-            color: #2c3e50;
-            font-size: 1.5rem;
-        }
-        
+
         .search-bar {
-            display: flex;
-            align-items: center;
-            background: white;
-            border-radius: 50px;
-            padding: 8px 15px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            margin-bottom: 10px;
+          width: auto;
+          margin-bottom: 0;
+          flex: 1;
+          margin: 0 15px;
         }
-        
-        .search-bar input {
-            border: none;
-            outline: none;
-            padding: 8px;
-            font-size: 1rem;
-            width: 100%;
-        }
-        
-        .search-bar i {
-            color: #6a11cb;
-        }
-        
+
         .user-actions {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            gap: 15px;
+          width: auto;
+          justify-content: flex-end;
         }
-        
-        .user-actions i {
-            font-size: 1.3rem;
-            color: #2c3e50;
-            cursor: pointer;
-        }
-        
-        .app-content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .library-view {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            padding: 15px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-            max-height: 40vh;
-            overflow-y: auto;
-        }
-        
-        .library-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .library-header h2 {
-            font-size: 1.3rem;
-        }
-        
-        .books-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 15px;
-        }
-        
-        .book-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .book-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-        }
-        
-        .book-cover {
-            height: 160px;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1rem;
-            text-align: center;
-            padding: 10px;
-        }
-        
-        .book-info {
-            padding: 10px;
-        }
-        
-        .book-title {
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: #2c3e50;
-            font-size: 0.9rem;
-        }
-        
-        .book-author {
-            color: #7f8c8d;
-            font-size: 0.8rem;
-        }
-        
-        .reader-view {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-            display: flex;
-            flex-direction: column;
-            min-height: 50vh;
-        }
-        
+
         .reader-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
+          flex-wrap: nowrap;
         }
-        
+
         .book-title-display {
-            font-size: 1.2rem;
-            color: #2c3e50;
-            font-weight: 700;
-            text-align: center;
-            width: 100%;
-            margin: 10px 0;
-            order: 3;
+          width: auto;
+          order: 0;
+          margin: 0;
         }
-        
-        .reader-content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f8f9fa;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            position: relative;
-            min-height: 300px;
-        }
-        
-        .page-image {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .reader-controls {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .nav-controls {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-        }
-        
-        .btn {
-            padding: 12px 20px;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease;
-            flex: 1;
-            font-size: 0.9rem;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-        
+
         .btn-outline {
-            background: transparent;
-            border: 2px solid #6a11cb;
-            color: #6a11cb;
-            order: 1;
-            width: auto;
+          order: 0;
         }
-        
+      }
+
+      @media (min-width: 768px) {
+        body {
+          padding: 20px;
+        }
+
+        header {
+          padding: 20px;
+          margin-bottom: 30px;
+        }
+
+        .logo h1 {
+          font-size: 1.8rem;
+        }
+
+        .app-content {
+          flex-direction: row;
+          gap: 30px;
+        }
+
+        .library-view {
+          flex: 1;
+          max-height: 70vh;
+          padding: 20px;
+        }
+
+        .reader-view {
+          flex: 2;
+          min-height: 70vh;
+          padding: 30px;
+        }
+
+        .books-grid {
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+          gap: 20px;
+        }
+
+        .book-cover {
+          height: 200px;
+        }
+
+        .reader-controls {
+          flex-direction: row;
+          align-items: center;
+        }
+
+        .nav-controls {
+          flex: 1;
+        }
+
         .progress-bar {
-            width: 100%;
+          flex: 2;
+          margin: 0 20px;
         }
-        
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            color: #2c3e50;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-        
-        .progress-track {
-            height: 6px;
-            background: #e0e0e0;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            border-radius: 3px;
-            width: 0%;
-        }
-        
-        .view-controls {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            order: 2;
-        }
-        
-        .view-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f0f0f0;
-            color: #2c3e50;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .view-btn.active {
-            background: #6a11cb;
-            color: white;
-        }
-        
-        .bookmark-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #ff6b6b;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            order: 3;
-        }
-        
-        .bookmark-btn:hover {
-            background: #ff5252;
-        }
-        
+
         .mobile-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
+          display: none;
         }
-        
-        .mobile-nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0.8rem;
-            color: #7f8c8d;
+      }
+      a {
+        text-decoration: none;
+      }
+
+      @media (min-width: 992px) {
+        .books-grid {
+          grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
         }
-        
-        .mobile-nav-item i {
-            font-size: 1.2rem;
-            margin-bottom: 4px;
+
+        .book-cover {
+          height: 220px;
         }
-        
-        .mobile-nav-item.active {
-            color: #6a11cb;
+      }
+
+      /* Touch device improvements */
+      @media (hover: none) {
+        .book-card:hover {
+          transform: none;
         }
-        
-        /* Media Queries for Responsiveness */
-        @media (min-width: 480px) {
-            .logo {
-                width: auto;
-                justify-content: flex-start;
-                margin-bottom: 0;
-            }
-            
-            .search-bar {
-                width: auto;
-                margin-bottom: 0;
-                flex: 1;
-                margin: 0 15px;
-            }
-            
-            .user-actions {
-                width: auto;
-                justify-content: flex-end;
-            }
-            
-            .reader-header {
-                flex-wrap: nowrap;
-            }
-            
-            .book-title-display {
-                width: auto;
-                order: 0;
-                margin: 0;
-            }
-            
-            .btn-outline {
-                order: 0;
-            }
+
+        .btn:hover {
+          transform: none;
         }
-        
-        @media (min-width: 768px) {
-            body {
-                padding: 20px;
-            }
-            
-            header {
-                padding: 20px;
-                margin-bottom: 30px;
-            }
-            
-            .logo h1 {
-                font-size: 1.8rem;
-            }
-            
-            .app-content {
-                flex-direction: row;
-                gap: 30px;
-            }
-            
-            .library-view {
-                flex: 1;
-                max-height: 70vh;
-                padding: 20px;
-            }
-            
-            .reader-view {
-                flex: 2;
-                min-height: 70vh;
-                padding: 30px;
-            }
-            
-            .books-grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 20px;
-            }
-            
-            .book-cover {
-                height: 200px;
-            }
-            
-            .reader-controls {
-                flex-direction: row;
-                align-items: center;
-            }
-            
-            .nav-controls {
-                flex: 1;
-            }
-            
-            .progress-bar {
-                flex: 2;
-                margin: 0 20px;
-            }
-            
-            .mobile-nav {
-                display: none;
-            }
-        }
-        a{
-            text-decoration: none;
-        }
-        
-        @media (min-width: 992px) {
-            .books-grid {
-                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            }
-            
-            .book-cover {
-                height: 220px;
-            }
-        }
-        
-        /* Touch device improvements */
-        @media (hover: none) {
-            .book-card:hover {
-                transform: none;
-            }
-            
-            .btn:hover {
-                transform: none;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <div class="logo">
-                <i class="fas fa-book-open"></i>
-                <h1>Ayesha's Library</h1>
-            </div>
-            
-            <div class="search-bar">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for books...">
-            </div>
-            
-            <div class="user-actions">
-                <i class="fas fa-bookmark"></i>
-                <i class="fas fa-cog"></i>
-                <i class="fas fa-user"></i>
-            </div>
-        </header>
-        
-        <div class="app-content">
-            <div class="library-view">
-                <div class="library-header">
-                    <h2>Books</h2>
-                    <div class="view-controls">
-                        <div class="view-btn active"><i class="fas fa-grid"></i></div>
-                        <div class="view-btn"><i class="fas fa-list"></i></div>
-                    </div>
-                </div>
-                
-                <div class="books-grid">
-                    <div class="book-card" data-book="1">
-                        <div class="book-cover">Image Book</div>
-                        <div class="book-info">
-                            <div class="book-title">Image Book</div>
-                            <div class="book-author">Ayesh Akter</div>
-                        </div>
-                    </div>
-                    <a href="https://docs.google.com/document/d/1_bwlk1Xr3xvzCRRACv2KGreJwxOH5h9vInbfr7Aeopw/edit?tab=t.0" target="_blank">
-                        <div class="book-card" data-book="2">
-                        <div class="book-cover">Text Book</div>
-                        <div class="book-info">
-                            <div class="book-title">Text Book</div>
-                            <div class="book-author">Ayesh Akter</div>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="reader-view">
-                <div class="reader-header">
-                    <button class="btn btn-outline" id="backToLibrary">
-                        <i class="fas fa-arrow-left"></i> <span class="btn-text">Library</span>
-                    </button>
-                    <div class="book-title-display">Select a book to start reading</div>
-                    <div class="view-controls">
-                        <div class="view-btn"><i class="fas fa-minus"></i></div>
-                        <div class="view-btn active"><i class="fas fa-text-height"></i></div>
-                        <div class="view-btn"><i class="fas fa-plus"></i></div>
-                    </div>
-                    <div class="bookmark-btn">
-                        <i class="fas fa-bookmark"></i>
-                    </div>
-                </div>
-                
-                <div class="reader-content">
-                    <div class="page-placeholder">
-                        <i class="fas fa-book-reader" style="font-size: 5rem; color: #6a11cb; opacity: 0.3;"></i>
-                        <p style="margin-top: 20px; color: #7f8c8d;">Select a book from your library to start reading</p>
-                    </div>
-                </div>
-                
-                <div class="reader-controls">
-                    <div class="nav-controls">
-                        <button class="btn" id="prevPage">
-                            <i class="fas fa-chevron-left"></i> <span class="btn-text">Previous</span>
-                        </button>
-                        <button class="btn" id="nextPage">
-                            <span class="btn-text">Next</span> <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="progress-bar">
-                        <div class="progress-info">
-                            <span>Page 0 of 0</span>
-                            <span>0%</span>
-                        </div>
-                        <div class="progress-track">
-                            <div class="progress-fill"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <header>
+        <div class="logo">
+          <i class="fas fa-book-open"></i>
+          <h1>Ayesha's Library</h1>
         </div>
+
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search for books..." />
+        </div>
+
+        <div class="user-actions">
+          <i class="fas fa-bookmark"></i>
+          <i class="fas fa-cog"></i>
+          <i class="fas fa-user"></i>
+        </div>
+      </header>
+
+      <div class="app-content">
+        <div class="library-view">
+          <div class="library-header">
+            <h2>Books</h2>
+            <div class="view-controls">
+              <div class="view-btn active"><i class="fas fa-grid"></i></div>
+              <div class="view-btn"><i class="fas fa-list"></i></div>
+            </div>
+          </div>
+
+          <div class="books-grid">
+            <div class="book-card" data-book="1">
+              <div class="book-cover">Image Book</div>
+              <div class="book-info">
+                <div class="book-title">Image Book</div>
+                <div class="book-author">Ayesh Akter</div>
+              </div>
+            </div>
+            <a
+              href="https://docs.google.com/document/d/1_bwlk1Xr3xvzCRRACv2KGreJwxOH5h9vInbfr7Aeopw/edit?tab=t.0"
+              target="_blank"
+            >
+              <div class="book-card" data-book="2">
+                <div class="book-cover">Text Book</div>
+                <div class="book-info">
+                  <div class="book-title">Text Book</div>
+                  <div class="book-author">Ayesh Akter</div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="reader-view">
+          <div class="reader-header">
+            <button class="btn btn-outline" id="backToLibrary">
+              <i class="fas fa-arrow-left"></i>
+              <span class="btn-text">Library</span>
+            </button>
+            <div class="book-title-display">Select a book to start reading</div>
+            <div class="view-controls">
+              <div class="view-btn"><i class="fas fa-minus"></i></div>
+              <div class="view-btn active">
+                <i class="fas fa-text-height"></i>
+              </div>
+              <div class="view-btn"><i class="fas fa-plus"></i></div>
+            </div>
+            <div class="bookmark-btn">
+              <i class="fas fa-bookmark"></i>
+            </div>
+          </div>
+
+          <div class="reader-content">
+            <div class="page-placeholder">
+              <i
+                class="fas fa-book-reader"
+                style="font-size: 5rem; color: #6a11cb; opacity: 0.3"
+              ></i>
+              <p style="margin-top: 20px; color: #7f8c8d">
+                Select a book from your library to start reading
+              </p>
+            </div>
+          </div>
+
+          <div class="reader-controls">
+            <div class="nav-controls">
+              <button class="btn" id="prevPage">
+                <i class="fas fa-chevron-left"></i>
+                <span class="btn-text">Previous</span>
+              </button>
+              <button class="btn" id="nextPage">
+                <span class="btn-text">Next</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+
+            <div class="progress-bar">
+              <div class="progress-info">
+                <span>Page 0 of 0</span>
+                <span>0%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Mobile Navigation -->
     <div class="mobile-nav">
-        <div class="mobile-nav-item active">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </div>
-        <div class="mobile-nav-item">
-            <i class="fas fa-book-open"></i>
-            <span>Library</span>
-        </div>
-        <div class="mobile-nav-item">
-            <i class="fas fa-bookmark"></i>
-            <span>Bookmarks</span>
-        </div>
-        <div class="mobile-nav-item">
-            <i class="fas fa-cog"></i>
-            <span>Settings</span>
-        </div>
+      <div class="mobile-nav-item active">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </div>
+      <div class="mobile-nav-item">
+        <i class="fas fa-book-open"></i>
+        <span>Library</span>
+      </div>
+      <div class="mobile-nav-item">
+        <i class="fas fa-bookmark"></i>
+        <span>Bookmarks</span>
+      </div>
+      <div class="mobile-nav-item">
+        <i class="fas fa-cog"></i>
+        <span>Settings</span>
+      </div>
     </div>
 
     <script>
-        // Sample book data with page images
-        const books = {
-            1: {
-                title: "Image Book",
-                author: "Ayesh Akter",
-                pages: [
-                    "images/1.png",
-                    "images/2.png",
-                    "images/3.png",
-                    "images/5.png",
-                    "images/6.png",
-                    "images/7.png",
-                    "images/8.png",
-                    "images/9.png",
-                    "images/10.png",
-                    "images/11.png",
-                    "images/12.png",
-                    "images/13.png",
-                    "images/14.png",
-                    "images/15.png",
-                    "images/16.png",
-                ]
-            },
-            // 2: {
-            //     title: "Text Book",
-            //     author: "Ayesh Akter",
-            // }
-        };
+      // Sample book data with page images
+      const books = {
+        1: {
+          title: "Image Book",
+          author: "Ayesh Akter",
+          pages: [
+            "images/1.png",
+            "images/2.png",
+            "images/3.png",
+            "images/5.png",
+            "images/6.png",
+            "images/7.png",
+            "images/8.png",
+            "images/9.png",
+            "images/10.png",
+            "images/11.png",
+            "images/12.png",
+            "images/13.png",
+            "images/14.png",
+            "images/15.png",
+            "images/16.png",
+            "images/17.png",
+            "images/18.png",
+            "images/19.png",
+            "images/20.png",
+            "images/21.png",
+            "images/22.png",
+          ],
+        },
+        // 2: {
+        //     title: "Text Book",
+        //     author: "Ayesh Akter",
+        // }
+      };
 
-        // DOM elements
-        const libraryView = document.querySelector('.library-view');
-        const readerView = document.querySelector('.reader-view');
-        const backToLibraryBtn = document.getElementById('backToLibrary');
-        const bookTitleDisplay = document.querySelector('.book-title-display');
-        const readerContent = document.querySelector('.reader-content');
-        const prevPageBtn = document.getElementById('prevPage');
-        const nextPageBtn = document.getElementById('nextPage');
-        const progressInfo = document.querySelector('.progress-info');
-        const progressFill = document.querySelector('.progress-fill');
-        const bookCards = document.querySelectorAll('.book-card');
-        const bookmarkBtn = document.querySelector('.bookmark-btn');
+      // DOM elements
+      const libraryView = document.querySelector(".library-view");
+      const readerView = document.querySelector(".reader-view");
+      const backToLibraryBtn = document.getElementById("backToLibrary");
+      const bookTitleDisplay = document.querySelector(".book-title-display");
+      const readerContent = document.querySelector(".reader-content");
+      const prevPageBtn = document.getElementById("prevPage");
+      const nextPageBtn = document.getElementById("nextPage");
+      const progressInfo = document.querySelector(".progress-info");
+      const progressFill = document.querySelector(".progress-fill");
+      const bookCards = document.querySelectorAll(".book-card");
+      const bookmarkBtn = document.querySelector(".bookmark-btn");
 
-        // App state
-        let currentBook = null;
-        let currentPage = 0;
+      // App state
+      let currentBook = null;
+      let currentPage = 0;
 
-        // Initialize the app
-        function init() {
-            setupEventListeners();
-            checkMobileView();
+      // Initialize the app
+      function init() {
+        setupEventListeners();
+        checkMobileView();
+      }
+
+      // Set up event listeners
+      function setupEventListeners() {
+        // Book selection
+        bookCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            const bookId = card.getAttribute("data-book");
+            openBook(bookId);
+          });
+        });
+
+        // Navigation
+        backToLibraryBtn.addEventListener("click", showLibrary);
+        prevPageBtn.addEventListener("click", goToPrevPage);
+        nextPageBtn.addEventListener("click", goToNextPage);
+
+        // Bookmark
+        bookmarkBtn.addEventListener("click", toggleBookmark);
+
+        // Window resize
+        window.addEventListener("resize", checkMobileView);
+      }
+
+      // Check if mobile view and adjust UI accordingly
+      function checkMobileView() {
+        const isMobile = window.innerWidth < 768;
+        const btnTexts = document.querySelectorAll(".btn-text");
+
+        // Show/hide button texts based on screen size
+        btnTexts.forEach((text) => {
+          text.style.display = isMobile ? "none" : "inline";
+        });
+
+        // Adjust reader view height on mobile
+        if (isMobile) {
+          const appContent = document.querySelector(".app-content");
+          const headerHeight = document.querySelector("header").offsetHeight;
+          const mobileNavHeight =
+            document.querySelector(".mobile-nav").offsetHeight;
+          const windowHeight = window.innerHeight;
+
+          appContent.style.minHeight = `${
+            windowHeight - headerHeight - mobileNavHeight - 40
+          }px`;
         }
+      }
 
-        // Set up event listeners
-        function setupEventListeners() {
-            // Book selection
-            bookCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    const bookId = card.getAttribute('data-book');
-                    openBook(bookId);
-                });
-            });
-            
-            // Navigation
-            backToLibraryBtn.addEventListener('click', showLibrary);
-            prevPageBtn.addEventListener('click', goToPrevPage);
-            nextPageBtn.addEventListener('click', goToNextPage);
-            
-            // Bookmark
-            bookmarkBtn.addEventListener('click', toggleBookmark);
-            
-            // Window resize
-            window.addEventListener('resize', checkMobileView);
-        }
+      // Open a book
+      function openBook(bookId) {
+        currentBook = books[bookId];
+        currentPage = 0;
 
-        // Check if mobile view and adjust UI accordingly
-        function checkMobileView() {
-            const isMobile = window.innerWidth < 768;
-            const btnTexts = document.querySelectorAll('.btn-text');
-            
-            // Show/hide button texts based on screen size
-            btnTexts.forEach(text => {
-                text.style.display = isMobile ? 'none' : 'inline';
-            });
-            
-            // Adjust reader view height on mobile
-            if (isMobile) {
-                const appContent = document.querySelector('.app-content');
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const mobileNavHeight = document.querySelector('.mobile-nav').offsetHeight;
-                const windowHeight = window.innerHeight;
-                
-                appContent.style.minHeight = `${windowHeight - headerHeight - mobileNavHeight - 40}px`;
-            }
-        }
+        // Update UI
+        bookTitleDisplay.textContent = currentBook.title;
+        updatePage();
 
-        // Open a book
-        function openBook(bookId) {
-            currentBook = books[bookId];
-            currentPage = 0;
-            
-            // Update UI
-            bookTitleDisplay.textContent = currentBook.title;
-            updatePage();
-            
-            // Show reader view
-            readerView.style.display = 'flex';
-            libraryView.style.display = 'none';
-            
-            // Hide mobile nav in reader view
-            document.querySelector('.mobile-nav').style.display = 'none';
-        }
+        // Show reader view
+        readerView.style.display = "flex";
+        libraryView.style.display = "none";
 
-        // Show library view
-        function showLibrary() {
-            readerView.style.display = 'none';
-            libraryView.style.display = 'block';
-            
-            // Show mobile nav again
-            document.querySelector('.mobile-nav').style.display = 'flex';
-        }
+        // Hide mobile nav in reader view
+        document.querySelector(".mobile-nav").style.display = "none";
+      }
 
-        // Update the page display
-        function updatePage() {
-            if (!currentBook) return;
-            
-            // Create page image
-            readerContent.innerHTML = '';
-            const img = document.createElement('img');
-            img.src = currentBook.pages[currentPage];
-            img.classList.add('page-image');
-            img.alt = `Page ${currentPage + 1}`;
-            readerContent.appendChild(img);
-            
-            // Update progress
-            const pageCount = currentBook.pages.length;
-            const progress = ((currentPage + 1) / pageCount) * 100;
-            
-            progressInfo.innerHTML = `
+      // Show library view
+      function showLibrary() {
+        readerView.style.display = "none";
+        libraryView.style.display = "block";
+
+        // Show mobile nav again
+        document.querySelector(".mobile-nav").style.display = "flex";
+      }
+
+      // Update the page display
+      function updatePage() {
+        if (!currentBook) return;
+
+        // Create page image
+        readerContent.innerHTML = "";
+        const img = document.createElement("img");
+        img.src = currentBook.pages[currentPage];
+        img.classList.add("page-image");
+        img.alt = `Page ${currentPage + 1}`;
+        readerContent.appendChild(img);
+
+        // Update progress
+        const pageCount = currentBook.pages.length;
+        const progress = ((currentPage + 1) / pageCount) * 100;
+
+        progressInfo.innerHTML = `
                 <span>Page ${currentPage + 1} of ${pageCount}</span>
                 <span>${Math.round(progress)}%</span>
             `;
-            
-            progressFill.style.width = `${progress}%`;
-            
-            // Update button states
-            prevPageBtn.disabled = currentPage === 0;
-            nextPageBtn.disabled = currentPage === pageCount - 1;
-        }
 
-        // Go to previous page
-        function goToPrevPage() {
-            if (currentPage > 0) {
-                currentPage--;
-                updatePage();
-            }
-        }
+        progressFill.style.width = `${progress}%`;
 
-        // Go to next page
-        function goToNextPage() {
-            if (currentPage < currentBook.pages.length - 1) {
-                currentPage++;
-                updatePage();
-            }
-        }
+        // Update button states
+        prevPageBtn.disabled = currentPage === 0;
+        nextPageBtn.disabled = currentPage === pageCount - 1;
+      }
 
-        // Toggle bookmark
-        function toggleBookmark() {
-            bookmarkBtn.classList.toggle('active');
-            // In a real app, you would save the bookmark to local storage or a database
+      // Go to previous page
+      function goToPrevPage() {
+        if (currentPage > 0) {
+          currentPage--;
+          updatePage();
         }
+      }
 
-        // Initialize the app when the DOM is loaded
-        document.addEventListener('DOMContentLoaded', init);
+      // Go to next page
+      function goToNextPage() {
+        if (currentPage < currentBook.pages.length - 1) {
+          currentPage++;
+          updatePage();
+        }
+      }
+
+      // Toggle bookmark
+      function toggleBookmark() {
+        bookmarkBtn.classList.toggle("active");
+        // In a real app, you would save the bookmark to local storage or a database
+      }
+
+      // Initialize the app when the DOM is loaded
+      document.addEventListener("DOMContentLoaded", init);
     </script>
-</body>
+  </body>
 </html>
