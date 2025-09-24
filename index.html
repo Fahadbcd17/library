@@ -210,13 +210,14 @@
         overflow: hidden;
         position: relative;
         min-height: 300px;
+        border: 10px solid #6a11cb;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
       }
 
       .page-image {
         max-width: 100%;
         max-height: 100%;
         object-fit: contain;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       }
 
       .reader-controls {
@@ -330,6 +331,32 @@
 
       .bookmark-btn:hover {
         background: #ff5252;
+      }
+
+      .page-navigation {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+        justify-content: center;
+      }
+
+      .page-input {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 80px;
+        text-align: center;
+      }
+
+      .go-to-page-btn {
+        padding: 8px 15px;
+        background: #6a11cb;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
       }
 
       .mobile-nav {
@@ -586,6 +613,12 @@
                 <div class="progress-fill"></div>
               </div>
             </div>
+            
+            <!-- Page Navigation Input -->
+            <div class="page-navigation">
+              <input type="number" class="page-input" id="pageInput" placeholder="Page #" min="1">
+              <button class="go-to-page-btn" id="goToPageBtn">Go to Page</button>
+            </div>
           </div>
         </div>
       </div>
@@ -773,6 +806,8 @@
       const progressFill = document.querySelector(".progress-fill");
       const bookCards = document.querySelectorAll(".book-card");
       const bookmarkBtn = document.querySelector(".bookmark-btn");
+      const pageInput = document.getElementById("pageInput");
+      const goToPageBtn = document.getElementById("goToPageBtn");
 
       // App state
       let currentBook = null;
@@ -801,6 +836,14 @@
 
         // Bookmark
         bookmarkBtn.addEventListener("click", toggleBookmark);
+
+        // Go to page functionality
+        goToPageBtn.addEventListener("click", goToPage);
+        pageInput.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            goToPage();
+          }
+        });
 
         // Window resize
         window.addEventListener("resize", checkMobileView);
@@ -882,6 +925,10 @@
         // Update button states
         prevPageBtn.disabled = currentPage === 0;
         nextPageBtn.disabled = currentPage === pageCount - 1;
+        
+        // Update page input
+        pageInput.value = currentPage + 1;
+        pageInput.max = pageCount;
       }
 
       // Go to previous page
@@ -897,6 +944,21 @@
         if (currentPage < currentBook.pages.length - 1) {
           currentPage++;
           updatePage();
+        }
+      }
+
+      // Go to specific page
+      function goToPage() {
+        if (!currentBook) return;
+        
+        const pageNumber = parseInt(pageInput.value);
+        const totalPages = currentBook.pages.length;
+        
+        if (pageNumber >= 1 && pageNumber <= totalPages) {
+          currentPage = pageNumber - 1;
+          updatePage();
+        } else {
+          alert(`Please enter a page number between 1 and ${totalPages}`);
         }
       }
 
